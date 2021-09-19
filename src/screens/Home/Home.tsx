@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, FlatList, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
 
 import { DefaultButton, Header, Separator, SimpleCard, Typography } from '../../components';
@@ -86,6 +86,6 @@ function HomeScreen() {
       </View>
     </>
   );
-};
+}
 
 export default HomeScreen;
