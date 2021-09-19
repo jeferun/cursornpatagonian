@@ -64,7 +64,7 @@ function HomeScreen() {
 
   return (
     <>
-      <Header showBackButton={false} title="Home Screen" />
+      <Header showBackButton={false} title="" />
       <View style={styles.mainContainer}>
         <Separator size={20} />
         <DefaultButton text="Go To Experimental Screen" onPress={goToExperimentalScreen} />
