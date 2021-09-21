@@ -3,9 +3,9 @@ import { getAllBooks } from './../../services/books';
 
 // enum types auctionsu
 export enum BookTypes {
-  SET_BOOKS = 'GET_BOOKS',
-  SET_ERROR = 'ERROR',
-  SET_LOADING = 'LOADING', // p*
+  SET_BOOKS = 'SET_BOOKS',
+  SET_ERROR = 'SET_ERROR',
+  SET_LOADING = 'SET_LOADING', // p*
 }
 
 // action dispatch
