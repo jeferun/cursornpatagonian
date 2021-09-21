@@ -1,4 +1,4 @@
-import { getAllBooks } from './../../services/books';
+import { getBooks } from './../../services/books';
 
 
 // enum types auctionsu
@@ -24,10 +24,10 @@ export const setLoading = (value: boolean) => (({
   payload: { value }
 }));
 
-export const getBooks = () => async (dispatch: any, _: any) => { // p*
+export const getBooksAction = (search = '') => async (dispatch: any, _: any) => { // p*
   dispatch(setLoading(true));
   try {
-    const { success, data } = await getAllBooks();
+    const { success, data } = await getBooks(search);
     const error = "An unknown error occurred :'(";
     if (success) {
       dispatch(setBooks(data));
