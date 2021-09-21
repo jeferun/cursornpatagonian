@@ -1,21 +1,29 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { DefaultButton, Header, Separator, SimpleCard, Typography } from '../../components';
+// type state
+import { RootState } from '../../reducers';
+
+// component
+import { DefaultButton, Header, Separator, SimpleCard, TextField, Typography } from '../../components';
 import styles from './styles';
 
+// config
 import { goToScreen } from '../../navigation/controls';
 import { colors } from '../../utils/theme';
-import useBooksData from './hooks/useBooksData';
+
+// redux    transform: [{translateY: -110}]
+import { getBooks } from '../../reducers/book';
 
 const goToExperimentalScreen = () => {
   goToScreen('Experimental');
 };
 
-const flatlistKeyExtractor = (item: Book) => `${item.id}`;
+const flatlistKeyExtractor = (item: IBook) => `${item.id}`;
 
-const renderFlatlistItem = ({ item }: { item: Book }) => (
+const renderFlatlistItem = ({ item }: { item: IBook }) => (
   <SimpleCard
     text={item.title}
     uri={item.book_covers[0].URL}
@@ -24,14 +32,22 @@ const renderFlatlistItem = ({ item }: { item: Book }) => (
 );
 
 function HomeScreen() {
-  const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
-  const { books, loading, errorOccurred } = useBooksData(refreshFlag);
-
+  const dispatch = useDispatch();
   const netInfo = useNetInfo();
+  const [refreshFlag, setRefreshFlag] = useState<boolean>(false);
+  const { books, loading, errorOccurred } = useSelector<RootState, IBookState>(
+    (state) => state.book
+  );
+
+  useEffect(() => {
+    dispatch(getBooks());
+  }, []);
 
   const toggleRefreshFlag = useCallback(() => {
     setRefreshFlag(!refreshFlag);
   }, [refreshFlag]);
+
+  const setInputText = (text: string) => console.log({ text });
 
   if (!netInfo.isConnected) {
     return (
@@ -55,7 +71,7 @@ function HomeScreen() {
   if (errorOccurred) {
     return (
       <View style={styles.wholeScreenCenter}>
-        <Typography size={20}>An unknown error occurred :'(</Typography>
+        <Typography size={20}>{errorOccurred}</Typography>
         <Separator size={15} />
         <DefaultButton text="Retry" onPress={toggleRefreshFlag} />
       </View>
@@ -66,9 +82,14 @@ function HomeScreen() {
     <>
       <Header showBackButton={false} title="" />
       <View style={styles.mainContainer}>
-        <Separator size={20} />
-        <DefaultButton text="Go To Experimental Screen" onPress={goToExperimentalScreen} />
-        <Separator size={20} />
+        <Separator size={10} />
+        <TextField
+          placeholder='Consultar'
+          value=''
+          onChange={setInputText}
+        />
+        <Typography size={18} color={colors.mainOrange} variant='bold'>BOOKS</Typography>
+        <Separator size={10} />
         <View style={styles.bookContainer}>
           <FlatList
             keyExtractor={flatlistKeyExtractor}

@@ -11,7 +11,7 @@ import { colors } from '../../utils/theme';
 const BookDetailsScreen = ({ route }) => {
   const { id, title } = route.params;
 
-  const [book, setBook] = useState<Book | null>(null);
+  const [book, setBook] = useState<IBook | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const getBooksData = async () => {

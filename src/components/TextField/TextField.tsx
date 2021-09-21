@@ -4,11 +4,12 @@ import { TextInput, View } from 'react-native';
 import styles from './styles';
 
 interface Props {
-  text: string;
-  onChange: () => void;
+  placeholder: string;
+  value: string;
+  onChange: (text: string) => void;
 }
 
-const TextField = ({ text, onChange }: Props) => (
+const TextField = ({ placeholder, value, onChange }: Props) => (
   <View style={styles.mainContainer}>
     <TextInput
       allowFontScaling={false}
@@ -16,8 +17,8 @@ const TextField = ({ text, onChange }: Props) => (
       autoCorrect={false}
       // editable={false}
       // keyboardType="numeric"
-      placeholder="Write something..."
-      value={text}
+      placeholder={placeholder}
+      value={value}
       // onChangeText={(text) => setInputText(text)}
       onChangeText={onChange}
       style={styles.textInput}
