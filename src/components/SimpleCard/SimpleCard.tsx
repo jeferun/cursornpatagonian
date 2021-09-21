@@ -25,6 +25,8 @@ function SimpleCard({ onPress, text, uri, variant = 'primary' }: Props) {
       <Image
         style={styles.image}
         source={{ uri }}
+        resizeMode="cover"
+        
       />
       <Separator />
       <Typography

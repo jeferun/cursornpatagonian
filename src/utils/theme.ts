@@ -6,4 +6,7 @@ export const colors = {
   mainOrange: '#FF7F50',
   white: '#FFFFFF',
   yellow: '#FFC500',
+  YellowDarker: '#a78200',
+  maroon: '#800000',
+  maroonDark: '#4d0000',
 };
