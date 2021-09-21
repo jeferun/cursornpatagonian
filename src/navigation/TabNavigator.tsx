@@ -3,7 +3,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { RouteProp } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { HistoryScreen } from '../screens';
+import { CharacterScreen, HistoryScreen } from '../screens';
 import HomeStack from './HomeStack';
 
 import { colors } from '../utils/theme';
@@ -53,7 +53,11 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={navigatorScreenOptions}>
       <Tab.Screen name="BookTab" component={HomeStack} options={{ title: 'Libros' }} />
-      <Tab.Screen name="CharacterTab" component={HomeStack} options={{ title: 'Personajes' }} />
+      <Tab.Screen
+        name="CharacterTab"
+        component={CharacterScreen}
+        options={{ title: 'Personajes' }}
+      />
       <Tab.Screen name="HistoryTab" component={HistoryScreen} options={{ title: 'Historial' }} />
     </Tab.Navigator>
   );
