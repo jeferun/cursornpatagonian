@@ -7,19 +7,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../reducers';
 
 // component
-import { DefaultButton, Header, Separator, SimpleCard, TextField, Typography } from '../../components';
+import { DefaultButton, Header, SearchField, Separator, SimpleCard, Typography } from '../../components';
 import styles from './styles';
 
 // config
 import { goToScreen } from '../../navigation/controls';
 import { colors } from '../../utils/theme';
 
-// redux    transform: [{translateY: -110}]
-import { getBooks } from '../../reducers/book';
-
-const goToExperimentalScreen = () => {
-  goToScreen('Experimental');
-};
+// get data
+import { getBooksAction } from '../../reducers/book';
 
 const flatlistKeyExtractor = (item: IBook) => `${item.id}`;
 
@@ -40,14 +36,19 @@ function HomeScreen() {
   );
 
   useEffect(() => {
-    dispatch(getBooks());
+    dispatch(getBooksAction());
   }, []);
 
   const toggleRefreshFlag = useCallback(() => {
+    dispatch(getBooksAction());
     setRefreshFlag(!refreshFlag);
   }, [refreshFlag]);
 
-  const setInputText = (text: string) => console.log({ text });
+  const handleOnPress = useCallback((text) => { // p*
+    dispatch(getBooksAction(text));
+    setRefreshFlag(!refreshFlag);
+  }, [refreshFlag]);
+
 
   if (!netInfo.isConnected) {
     return (
@@ -83,12 +84,11 @@ function HomeScreen() {
       <Header showBackButton={false} title="" />
       <View style={styles.mainContainer}>
         <Separator size={10} />
-        <TextField
-          placeholder='Consultar'
-          value=''
-          onChange={setInputText}
+        <SearchField
+          placeholder='Search a book'
+          onPressIcon={handleOnPress}
         />
-        <Typography size={18} color={colors.mainOrange} variant='bold'>BOOKS</Typography>
+        <Typography size={20} color={colors.maroon} variant='bold'>BOOKS</Typography>
         <Separator size={10} />
         <View style={styles.bookContainer}>
           <FlatList

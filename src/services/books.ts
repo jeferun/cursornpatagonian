@@ -1,10 +1,15 @@
-import { bookDetailEndpoint, booksEndpoint } from './endpoints';
+import { bookDetailEndpoint, booksSearchEndpoint, booksEndpoint } from './endpoints';
 
-export const getAllBooks = async () => {
+export const getBooks = async (search: string) => {
   try {
     let serviceResponse;
+    let response;
 
-    const response = await fetch(booksEndpoint);
+    if (search) {
+      response = await fetch(booksSearchEndpoint(search));
+    } else {
+      response = await fetch(booksEndpoint);
+    }
     const parsedResponse = await response.json();
 
     if (response.status === 200) {
