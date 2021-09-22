@@ -10,8 +10,6 @@ import { RootState } from '../../reducers';
 import { getCharacters } from '../../reducers/characters';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { colors } from '../../utils/theme';
-// Generating dummy data
-const DATA = Array.from({ length: 100 }, (v, i) => `List item ${i}`);
 
 function CharacterScreen() {
   const dispatch = useDispatch();
@@ -25,7 +23,6 @@ function CharacterScreen() {
     dispatch(getCharacters());
   }, []);
 
-  console.log(JSON.stringify({ characters }));
   const toggleRefreshFlag = useCallback(() => {
     setRefreshFlag(!refreshFlag);
   }, [refreshFlag]);
@@ -65,11 +62,6 @@ function CharacterScreen() {
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <FlatList
-            getItemLayout={(data, index) => ({
-              length: DATA.length,
-              offset: DATA.length * index,
-              index,
-            })}
             refreshing={loading}
             data={characters}
             renderItem={({ item }: { item: ICharacter }) => {
