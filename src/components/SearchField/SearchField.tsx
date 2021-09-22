@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
@@ -13,7 +13,6 @@ interface Props {
 }
 
 function TextField({ placeholder, onPressIcon }: Props) {
-
   const [search, setSearch] = useState<string>(''); // p*
 
   const setInputText = (text: string) => setSearch(text);

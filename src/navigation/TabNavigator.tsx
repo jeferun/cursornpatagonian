@@ -7,6 +7,7 @@ import { HistoryScreen } from '../screens';
 import HomeStack from './HomeStack';
 
 import { colors } from '../utils/theme';
+import CharacterScreen from '../screens/Character';
 
 type Route = RouteProp<Record<string, object | undefined>, string>;
 
@@ -52,9 +53,13 @@ const navigatorScreenOptions = ({ route }: { route: Route }) => ({
 const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={navigatorScreenOptions}>
-      <Tab.Screen name="BookTab" component={HomeStack} options={{ title: 'Libros' }} />
-      <Tab.Screen name="CharacterTab" component={HomeStack} options={{ title: 'Personajes' }} />
-      <Tab.Screen name="HistoryTab" component={HistoryScreen} options={{ title: 'Historial' }} />
+      <Tab.Screen name="BookTab" component={HomeStack} options={{ title: 'Books' }} />
+      <Tab.Screen
+        name="CharacterTab"
+        component={CharacterScreen}
+        options={{ title: 'Characters' }}
+      />
+      <Tab.Screen name="HistoryTab" component={HistoryScreen} options={{ title: 'History' }} />
     </Tab.Navigator>
   );
 };

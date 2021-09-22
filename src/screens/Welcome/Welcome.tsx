@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DefaultButton, Separator, Typography } from '../../components';
 import styles from './styles';
 
-import { goToScreen, replaceRoute } from '../../navigation/controls';
+import { replaceRoute } from '../../navigation/controls';
 
 const goToMainTabs = async () => {
   try {
@@ -16,25 +16,15 @@ const goToMainTabs = async () => {
   }
 };
 
-const goToExperimentalScreen = () => {
-  goToScreen('Experimental');
-};
-
 const WelcomeScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <Typography size={20} variant="medium">
-        Welcome Screen
+        Welcome App Harry Potter
       </Typography>
       <Separator size={15} />
-      <DefaultButton text="Go To Tabs" textSize={16} onPress={goToMainTabs} />
+      <DefaultButton text="Enter books" textSize={16} onPress={goToMainTabs} />
       <Separator size={10} />
-      <DefaultButton
-        text="Go To Experimental Screen"
-        textSize={16}
-        onPress={goToExperimentalScreen}
-        variant="secondary"
-      />
     </View>
   );
 };
