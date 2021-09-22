@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Image, Text, FlatList, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Image, Text, FlatList, ActivityIndicator } from 'react-native';
 import styles from './styles';
 import { DefaultButton, Header, Separator, Typography } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -59,25 +59,24 @@ function CharacterScreen() {
   return (
     <>
       <Header title="" />
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.container}>
-          <FlatList
-            refreshing={loading}
-            data={characters}
-            renderItem={({ item }: { item: ICharacter }) => {
-              return (
-                <View style={styles.listItem}>
-                  <Image
-                    style={styles.image}
-                    source={require('../../assets/img/harrypotter.png')}
-                  />
-                  <Text style={styles.text}>{item.name}</Text>
-                </View>
-              );
-            }}
-          />
-        </View>
-      </ScrollView>
+      <View style={styles.container}>
+        <FlatList
+          refreshing={loading}
+          data={characters}
+          horizontal={false}
+          renderItem={({ item }: { item: ICharacter }) => {
+            return (
+              <View style={styles.listItem}>
+                <Image
+                  style={styles.image}
+                  source={require('../../assets/img/harrypotter.png')}
+                />
+                <Text style={styles.text}>{item.name}</Text>
+              </View>
+            );
+          }}
+        />
+      </View>
     </>
   );
 }
